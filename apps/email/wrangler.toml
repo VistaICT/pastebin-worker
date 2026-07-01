@@ -1,0 +1,21 @@
+name = "lockbox-email"
+main = "src/index.ts"
+compatibility_date = "2025-06-29"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[observability]
+enabled = true
+
+[observability.logs]
+head_sampling_rate = 1
+
+[vars]
+FROM_ADDRESS = "lockbox@vista.co"
+FROM_NAME    = "Lockbox"
+
+# Email Service binding — native Cloudflare email sending
+# (After enabling in the dashboard, add: [[send_email]]
+# name = "EMAIL")
+[[send_email]]
+name = "EMAIL"

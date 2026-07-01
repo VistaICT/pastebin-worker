@@ -1,0 +1,71 @@
+name = "lockbox"
+main = "src/index.ts"
+compatibility_date = "2025-06-29"
+compatibility_flags = ["nodejs_compat"]
+
+# ── Observability (logs & traces) ────────────────────────────────────────────
+[observability]
+enabled = true
+
+[observability.logs]
+head_sampling_rate = 1  # Capture 100% of logs (lower for high-traffic Workers)
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.01  # Sample 1% of traces to manage costs
+
+# ── Environment variables (non-secret) ──────────────────────────────────────
+[vars]
+ENVIRONMENT         = "production"
+BASE_URL            = "https://lockbox.vista.co"
+ENTRA_TENANT_ID     = "9a2a7202-e5e0-4d87-8961-875023f85cc5"
+ENTRA_CLIENT_ID     = "462908d0-7eca-4ece-9fa8-c35357fc873a"
+R2_BUCKET_GLOBAL    = "lockbox"
+R2_BUCKET_EU        = "lockbox-eu"
+R2_ACCOUNT_ID       = "425ea1a2776e7b2e2dc0808fe13d8c84"
+R2_ACCESS_KEY_ID    = "1a8c8c26e7e2c4028b3606bc2138777a"
+
+# ── Custom domain ────────────────────────────────────────────────────────────
+[[routes]]
+pattern       = "lockbox.vista.co"
+custom_domain = true
+
+# ── D1 Database ──────────────────────────────────────────────────────────────
+[[d1_databases]]
+binding        = "DB"
+database_name  = "lockbox"
+database_id    = "61ebaa99-9fff-4804-a0c8-0ecbb99289bc"
+migrations_dir = "./migrations"
+
+# ── R2 Buckets ───────────────────────────────────────────────────────────────
+[[r2_buckets]]
+binding     = "BUCKET_GLOBAL"
+bucket_name = "lockbox"
+
+[[r2_buckets]]
+binding     = "BUCKET_EU"
+bucket_name = "lockbox-eu"
+jurisdiction = "eu"
+
+# ── KV for PKCE state (short-lived, ~10 min TTL entries) ────────────────────
+[[kv_namespaces]]
+binding = "PKCE_KV"
+id      = "c622b4bdb0de4ef9be7c4da96593101a"
+
+[[services]]
+binding = "EMAIL_WORKER"
+service = "lockbox-email"
+
+# ── Static app assets (built from apps/web) ─────────────────────────────────
+[assets]
+directory             = "../web/dist"
+not_found_handling    = "single-page-application"
+binding               = "ASSETS"
+run_worker_first      = true
+
+# ── Secrets (set via wrangler secret put) ───────────────────────────────────
+# ENTRA_TENANT_ID       – Azure AD / Entra tenant ID
+# ENTRA_CLIENT_ID       – App registration client ID
+# ENTRA_CLIENT_SECRET   – App registration client secret
+# R2_SECRET_ACCESS_KEY  – R2 S3 API secret for direct browser upload minting
+# SESSION_SECRET        – Random ≥32 bytes for HMAC signing (openssl rand -hex 32)

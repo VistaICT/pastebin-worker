@@ -1,0 +1,31 @@
+{
+  "name": "lockbox",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "pnpm run build:app && pnpm run build:worker",
+    "build:app": "pnpm --filter @lockbox/app build",
+    "build:app:debug": "pnpm --filter @lockbox/app build:debug",
+    "build:worker": "pnpm --filter @lockbox/worker build",
+    "dev:app": "pnpm --filter @lockbox/app dev",
+    "dev:worker": "pnpm --filter @lockbox/worker dev",
+    "dev": "pnpm --parallel --filter '@lockbox/app' --filter '@lockbox/worker' dev",
+    "deploy:worker": "pnpm --filter @lockbox/worker run deploy",
+    "deploy:worker:build": "pnpm run build:app && pnpm --filter @lockbox/worker run deploy",
+    "deploy:worker:build:debug": "pnpm run build:app:debug && pnpm --filter @lockbox/worker run deploy",
+    "deploy": "pnpm run deploy:worker:build:debug",
+    "deploy:debug": "pnpm run deploy:worker:build:debug",
+    "deploy:prod": "pnpm run deploy:worker:build",
+    "deploy:cron": "pnpm --filter @lockbox/cron run deploy",
+    "deploy:email": "pnpm --filter @lockbox/email run deploy",
+    "deploy:all": "pnpm run deploy && pnpm run deploy:cron && pnpm run deploy:email",
+    "test": "pnpm -r test",
+    "db:migrate:local": "pnpm --filter @lockbox/worker db:migrate:local",
+    "db:migrate:remote": "pnpm --filter @lockbox/worker db:migrate:remote"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10",
+    "prettier": "^3.9.1",
+    "typescript": "^6.0.3"
+  }
+}

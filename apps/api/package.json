@@ -1,0 +1,30 @@
+{
+  "name": "@lockbox/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate:local": "wrangler d1 migrations apply lockbox --local",
+    "db:migrate:remote": "wrangler d1 migrations apply lockbox --remote"
+  },
+  "dependencies": {
+    "@lockbox/db": "workspace:*",
+    "@lockbox/types": "workspace:*",
+    "aws4fetch": "^1.0.20",
+    "drizzle-orm": "^0.41.0",
+    "hono": "^4.8.3",
+    "jose": "^5.10.0",
+    "nanoid": "^5.1.16"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260629.1",
+    "vitest": "^4.1.9",
+    "wrangler": "^4.105.0"
+  }
+}

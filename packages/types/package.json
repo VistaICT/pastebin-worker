@@ -1,0 +1,21 @@
+{
+  "name": "@lockbox/types",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared TypeScript types and interfaces for Lockbox",
+  "exports": {
+    "./api": "./src/api.ts",
+    "./auth": "./src/auth.ts",
+    "./base64": "./src/base64.ts",
+    "./secrets": "./src/secrets.ts",
+    "./storage": "./src/storage.ts",
+    "./validation": "./src/validation.ts"
+  },
+  "dependencies": {
+    "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "@types/validatorjs": "^3.15.5"
+  }
+}

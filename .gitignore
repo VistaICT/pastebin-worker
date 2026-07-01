@@ -1,0 +1,10 @@
+node_modules
+.temp
+.cache
+.wrangler
+*.sh
+dist
+.claude
+.output
+.env*
+.agents/

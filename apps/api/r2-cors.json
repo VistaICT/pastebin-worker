@@ -1,0 +1,26 @@
+{
+  "rules": [
+    {
+      "id": "lockbox-web",
+      "allowed": {
+        "origins": [
+          "https://lockbox.vista.co"
+        ],
+        "methods": [
+          "GET",
+          "HEAD",
+          "PUT",
+          "POST"
+        ],
+        "headers": [
+          "*"
+        ]
+      },
+      "exposeHeaders": [
+        "ETag"
+      ],
+      "maxAgeSeconds": 3600,
+      "allowCredentials": true
+    }
+  ]
+}

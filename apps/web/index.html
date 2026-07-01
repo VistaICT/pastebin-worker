@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Lockbox — Secure internal file and secret sharing for Vista" />
+    <title>Lockbox</title>
+    <link rel="icon" type="image/svg+xml" href="/lockbox.svg" />
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem('lockbox-theme') ?? 'system';
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const useDark = saved === 'dark' || (saved === 'system' && prefersDark);
+          document.documentElement.classList.toggle('dark', useDark);
+        } catch {
+          // Ignore storage/media errors and fall back to default light mode.
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

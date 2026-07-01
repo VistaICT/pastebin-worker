@@ -1,0 +1,28 @@
+name = "lockbox-cron"
+main = "src/index.ts"
+compatibility_date = "2025-06-29"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[observability]
+enabled = true
+
+[observability.logs]
+head_sampling_rate = 1
+
+[triggers]
+crons = ["0 3 * * *"]   # daily at 03:00 UTC
+
+[[d1_databases]]
+binding       = "DB"
+database_name = "lockbox"
+database_id   = "61ebaa99-9fff-4804-a0c8-0ecbb99289bc"
+
+[[r2_buckets]]
+binding     = "BUCKET_GLOBAL"
+bucket_name = "lockbox"
+
+[[r2_buckets]]
+binding     = "BUCKET_EU"
+bucket_name = "lockbox-eu"
+jurisdiction = "eu"

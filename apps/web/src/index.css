@@ -1,0 +1,41 @@
+@import './styles/_variables.scss';
+@import './styles/_keyframe-animations.scss';
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Class-based dark mode (toggled via .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  --color-brand-50:  oklch(97% 0.02 264);
+  --color-brand-100: oklch(93% 0.05 264);
+  --color-brand-200: oklch(86% 0.10 264);
+  --color-brand-300: oklch(77% 0.15 264);
+  --color-brand-400: oklch(65% 0.19 264);
+  --color-brand-500: oklch(55% 0.22 264);
+  --color-brand-600: oklch(48% 0.22 264);
+  --color-brand-700: oklch(40% 0.20 264);
+  --color-brand-800: oklch(32% 0.17 264);
+  --color-brand-900: oklch(24% 0.13 264);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-50;
+  }
+}

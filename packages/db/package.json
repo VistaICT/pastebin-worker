@@ -1,0 +1,13 @@
+{
+  "name": "@lockbox/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Drizzle ORM schema for Lockbox",
+  "exports": {
+    "./schema": "./src/schema.ts"
+  },
+  "devDependencies": {
+    "drizzle-orm": "^0.41.0"
+  }
+}
